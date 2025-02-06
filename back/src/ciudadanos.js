@@ -1,5 +1,5 @@
 const express = require('express');
-const bd = require('./bd');
+const bd = require('./bd.js');
 const ciudadanos = express();
 ciudadanos.get("/api/ciudadanos/listarTodos", (req, res) => {
     let consulta = "SELECT ciudadanos.idCiudadano, ciudadanos.nombre, ciudadanos.apellido, ciudadanos.apodo, ciudadanos.email, ciudadanos.fechaNacimiento, especies.nombre AS especie FROM ciudadanos INNER JOIN especies ON especies.idEspecie = ciudadanos.idEspecie";
@@ -38,7 +38,7 @@ ciudadanos.get("/api/ciudadanos/listarPorId/:id", (req, res) => {
     }
 });
 });
-ciudadanos.post("/api/ciudadanos/CrearCiudadano", (req, res) => {
+ciudadanos.post("/api/ciudadanos/crearCiudadano", (req, res) => {
     let formDatosCiudadano = {
         nombre: req.body.nombre,
         apellido: req.body.apellido,
