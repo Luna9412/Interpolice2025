@@ -2,7 +2,7 @@ const express = require('express');
 const bd = require('./bd.js');
 const ciudadanos = express();
 ciudadanos.get("/api/ciudadanos/listarTodos", (req, res) => {
-    let consulta = "SELECT ciudadanos.idCiudadano, ciudadanos.nombre, ciudadanos.apellido, ciudadanos.apodo, ciudadanos.email, ciudadanos.fechaNacimiento, especies.nombre AS especie FROM ciudadanos INNER JOIN especies ON especies.idEspecie = ciudadanos.idEspecie";
+    let consulta = "SELECT ciudadanos.idCiudadanos, ciudadanos.nombre, ciudadanos.apellido, ciudadanos.apodo, ciudadanos.email, ciudadanos.fechaNacimiento, especies.nombre AS especie FROM ciudadanos INNER JOIN especies ON especies.idEspecie = ciudadanos.idEspecie";
     bd.query(consulta, (error, ciudadanos) => {
         if (error) {
             res.send({
@@ -21,7 +21,7 @@ ciudadanos.get("/api/ciudadanos/listarTodos", (req, res) => {
 });
 ciudadanos.get("/api/ciudadanos/listarPorId/:id", (req, res) => {
     let id = req.params.id;
-    let consulta = "SELECT * FROM ciudadanos WHERE idCiudadano = ?";
+    let consulta = "SELECT * FROM ciudadanos WHERE idCiudadanos = ?";
     bd.query(consulta,[id], (error, ciudadanos) => {
         if (error) {
             res.send({
@@ -66,7 +66,7 @@ ciudadanos.post("/api/ciudadanos/crearCiudadano", (req, res) => {
 });
 ciudadanos.delete("/api/ciudadanos/borrarPorId/:id", (req, res) => {
     let id = req.params.id;
-    let consulta = "DELETE FROM ciudadanos WHERE idCiudadano = ? ";
+    let consulta = "DELETE FROM ciudadanos WHERE idCiudadanos = ? ";
     bd.query(consulta, [id], (error, ciudadanos) => {
       if (error) {
         res.send({
@@ -93,7 +93,7 @@ ciudadanos.delete("/api/ciudadanos/borrarPorId/:id", (req, res) => {
         fechaNacimiento: req.body.fechaNacimiento,
         idEspecie: req.body.idEspecie
     }
-    let consulta = "UPDATE ciudadanos SET ? WHERE idCiudadano = ?";
+    let consulta = "UPDATE ciudadanos SET ? WHERE idCiudadanos = ?";
     bd.query(consulta, [formDatosCiudadano,id], (error, ciudadanos) => {
       if (error) {
         res.send({
