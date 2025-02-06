@@ -2,7 +2,7 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const bd = require('./bd.js');
 const usuarios = express();
-usuarios.get("/api/usuario/listarUsuarios", (req, res) => {
+usuarios.get("/api/usuario/listarTodos", (req, res) => {
     let consulta ="SELECT roles.nombre AS rol, usuarios.idUsuarios, usuarios.nombre, usuarios.contrasena FROM usuarios INNER JOIN roles ON usuarios.roles_idRoles = roles.idRoles";
     bd.query(consulta, (error, usuarios) => {
       if (error) {

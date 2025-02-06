@@ -1,7 +1,7 @@
 const express = require('express');
 const bd = require('./bd.js');
 const delitos = express();
-delitos.get("/api/delito/listarTodosDelitos", (req, res) => {
+delitos.get("/api/delito/listarTodos", (req, res) => {
     let consulta = "SELECT gradodelito.grado, tipodelito.idTipoDelito, tipodelito.delito FROM tipodelito INNER JOIN gradodelito ON gradodelito.idGradoDelito = tipodelito.gradoDelito_idGradoDelito";
     bd.query(consulta, (error, delitos) => {
       if (error) {
