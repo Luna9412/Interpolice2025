@@ -4,7 +4,7 @@ const historial = express();
 historial.get("/api/historial/listarPorId/:id", (req, res) => {
   let id = req.params.id;
   let consulta = `  
-  SELECT registrodelito.idRegistroDelito AS id,ciudadanos.nombre, ciudadanos.apellido, ciudadanos.apodo, registrodelito.descripcion, tipodelito.delito, gradodelito.grado FROM historial
+  SELECT registrodelito.idRegistroDelito AS id,ciudadanos.nombre AS nombre, ciudadanos.apellido AS apellido, ciudadanos.apodo AS apodo, registrodelito.descripcion AS descripcion, tipodelito.delito AS delito, gradodelito.grado AS grado FROM historial
   INNER JOIN ciudadanos ON ciudadanos.idCiudadanos = historial.ciudadanos_idCiudadanos
   INNER JOIN registrodelito ON registrodelito.idRegistroDelito = historial.registroDelito_idRegistroDelito
   INNER JOIN tipodelito ON tipodelito.idTipoDelito = registrodelito.tipodelito_idTipoDelito
