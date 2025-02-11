@@ -24,7 +24,7 @@ function listaRoles(){
     });
 }
 btnNuevo.addEventListener("click",()=>{
-    accionForm = "crear";
+    accionForm = "agregar";
     frmCrearUsuario.show();
 });
 
@@ -56,7 +56,7 @@ function listarUsuarios(){
 }
 frmUsuario.addEventListener("submit",(e)=>{
     e.preventDefault();
-    if(accionForm === "crear"){
+    if(accionForm === "agregar"){
         fetch(api + "crearUsuario",{
             method: "POST",
             headers: {

@@ -8,7 +8,7 @@ let api = "http://localhost:4100/api/grado/";
 
 let accionForm = "";
 btnNuevo.addEventListener("click", () => {
-    accionForm = "crear";
+    accionForm = "agregar";
     frmCrearGrado.show();
 });
 
@@ -37,7 +37,7 @@ function listarGrados() {
 }
 frmGrado.addEventListener("submit", (e) => {
     e.preventDefault();
-    if(accionForm == "crear") {
+    if(accionForm == "agregar") {
         fetch(api + "crearGrado",{
             method: "POST",
             headers: {

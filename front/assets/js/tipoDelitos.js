@@ -22,7 +22,7 @@ function grados() {
 }
 let accionForm = "";
 btnNuevo.addEventListener('click', () => {
-    accionForm = "crear";
+    accionForm = "agregar";
     frmCrearDelito.show();
 });
 
@@ -52,7 +52,7 @@ function listarDelitos(){
 }
 frmDelito.addEventListener('submit', (e) => {
     e.preventDefault();
-    if(accionForm == "crear") {
+    if(accionForm == "agregar") {
         fetch(api + "crearDelito",{
             method: "POST",
             headers: {

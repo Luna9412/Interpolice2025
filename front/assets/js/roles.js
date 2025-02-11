@@ -6,7 +6,7 @@ let btnNuevo = document.querySelector("#btnNuevo");
 let api = "http://localhost:4100/api/roles/";
 let accionForm = "";
 btnNuevo.addEventListener("click", () => {
-    accionForm = "crear";
+    accionForm = "agregar";
     frmCrearRol.show();
 });
 
@@ -37,7 +37,7 @@ function listarRoles(){
 }
 frmRoles.addEventListener("submit", (e) => {
     e.preventDefault();
-    if(accionForm == "crear"){
+    if(accionForm == "agregar"){
         fetch(api + "crearRol",{
             method: "POST",
             headers: {

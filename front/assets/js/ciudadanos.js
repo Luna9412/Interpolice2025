@@ -29,7 +29,7 @@ function especies() {
 }
 
 btnNuevo.addEventListener("click", () => {
-    accionForm = "crear";
+    accionForm = "agregar";
     frmCrearCiudadano.show();
 });
 const on = (element, event, selector, handler) => {
@@ -63,7 +63,7 @@ function listarCiudadanos() {
 }
 frmCiudadano.addEventListener("submit", (e) => {
     e.preventDefault();
-    if(accionForm == "crear") {
+    if(accionForm == "agregar") {
         fetch(api + "crearCiudadano",{
             method: "POST",
             headers: {
