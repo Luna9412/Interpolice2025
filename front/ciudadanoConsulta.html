@@ -133,17 +133,17 @@
         <li class="nav-item"><a class="nav-link" href="index.html"><i class="bi bi-grid"></i><span>Dashboard</span></a></li>
         <li class="nav-item"><a class="nav-link collapsed" data-bs-target="#adminitrador-nav" data-bs-toggle="collapse" href="#"><i class="bi bi-person"></i><span> Administrador</span><i class="bi bi-chevron-down ms-auto"></i></a>
           <ul id="adminitrador-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-            <li><a href="admin_crearRol.html"><i class="bi bi-circle"></i><span>Gestionar Roles</span></a></li>
-            <li><a href="admin_crearUsuario.html"> <i class="bi bi-circle"></i><span>Gestionar Usuarios</span> </a></li>
-            <li><a href="admin_crearTipoDelito.html"> <i class="bi bi-circle"></i><span>Gestionar Tipo de delito</span> </a></li>
-            <li><a href="admin_crearGrado.html"> <i class="bi bi-circle"></i><span>Gestionar Grados de los Delitos</span> </a></li>
+            <li><a href="crearRol.html"><i class="bi bi-circle"></i><span>Gestionar Roles</span></a></li>
+            <li><a href="crearUsuario.html"> <i class="bi bi-circle"></i><span>Gestionar Usuarios</span> </a></li>
+            <li><a href="ciudadanoConsulta.html"><i class="bi bi-circle"></i><span>Gestionar Ciudadanos</span></a></li>
+            <li><a href="crearTipoDelito.html"> <i class="bi bi-circle"></i><span>Gestionar Tipo de delito</span> </a></li>
+            <li><a href="crearGrado.html"> <i class="bi bi-circle"></i><span>Gestionar Grados de los Delitos</span> </a></li>
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#"><i class="bi bi-person"></i><span>Personas</span><i class="bi bi-chevron-down ms-auto"></i></a>
+          <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#"><i class="bi bi-person"></i><span>Ciudadanos</span><i class="bi bi-chevron-down ms-auto"></i></a>
           <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-            <li><a href="persona_consulta.html"><i class="bi bi-circle"></i><span>Consultas</span></a></li>
-            <li><a href="#"> <i class="bi bi-circle"></i><span>Reportes</span> </a></li>
+            <li><a href="consultarHistorial.html"> <i class="bi bi-circle"></i><span>Reportes</span> </a></li>
           </ul>
         </li>
         <li class="nav-item">
@@ -155,12 +155,12 @@
         </li>
         <li class="nav-item"><a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#"><i class="bi bi-layout-text-window-reverse"></i><span>Reportes</span><i class="bi bi-chevron-down ms-auto"></i></a>
           <ul id="tables-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-            <li><a href="tables-general.html"><i class="bi bi-circle"></i><span>Delitos por mes</span></a></li>
-            <li><a href="tables-data.html"><i class="bi bi-circle"></i><span>Delitos mas comunes</span></a></li>
+            <li><a href="tables-general.html"><i class="bi bi-circle"></i><span>Delitos por mes(En progreso)</span></a></li>
+            <li><a href="tables-data.html"><i class="bi bi-circle"></i><span>Delitos mas comunes(En progreso)</span></a></li>
           </ul>
         </li>
         <li class="nav-heading">Pages</li>
-        <li class="nav-item"><a class="nav-link collapsed" href="users-profile.html"><i class="bi bi-person"></i><span>Profile</span></a></li>
+        <li class="nav-item"><a class="nav-link collapsed" href="users-profile.html"><i class="bi bi-person"></i><span>Perfil</span></a></li>
         <li class="nav-item"><a class="nav-link collapsed" href="pages-login.html"><i class="bi bi-box-arrow-in-right"></i><span>Login</span></a></li>
       </ul>
     </aside>
@@ -177,9 +177,9 @@
       <section class="section dashboard">
         <div class="row">
           <div class="col">
-            <button type="button" id="btnNuevo" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#frmCiudadano">Crear -- Ciudadano</button>
+            <button type="button" id="btnNuevo" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#frmCiudadano">Crear - Ciudadano</button>
             <div class="card mt-2">
-              <div class="card-header bg bg-primary text-#012970">
+              <div class="card-header bg bg-primary text-white">
                  <h4 style="text-align: center; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; ">CIUDADANOS</h4>
               </div>
               <div class="card-body">
