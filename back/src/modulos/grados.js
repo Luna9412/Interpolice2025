@@ -1,8 +1,8 @@
 const express = require("express");
 const bd = require("./bd.js");
 const grados = express();
-grados.get("/api/grado/listarTodos", (req, res) => {
-  let consulta = "SELECT * FROM gradodelito";
+grados.get("/api/grados/listarTodos", (req, res) => {
+  let consulta = "SELECT * FROM grados";
   bd.query(consulta, (error, grados) => {
     if (error) {
       res.send({
@@ -19,9 +19,9 @@ grados.get("/api/grado/listarTodos", (req, res) => {
     }
   });
 });
-grados.get("/api/grado/listarPorId/:id", (req, res) => {
+grados.get("/api/grados/listarPorId/:id", (req, res) => {
   let id = req.params.id;
-  let consulta = "SELECT * FROM gradodelito WHERE idGradoDelito  = ?";
+  let consulta = "SELECT * FROM grados WHERE id  = ?";
   bd.query(consulta, [id], (error, grados) => {
     if (error) {
       res.send({
@@ -38,11 +38,11 @@ grados.get("/api/grado/listarPorId/:id", (req, res) => {
     }
   });
 });
-grados.post("/api/grado/crearGrado", (req, res) => {
+grados.post("/api/grados/crearGrado", (req, res) => {
   let formDatosGrados = {
     grado: req.body.grado
   };
-  let consulta = "INSERT INTO gradodelito SET ?";
+  let consulta = "INSERT INTO grados SET ?";
   bd.query(consulta, [formDatosGrados], (error, grados) => {
     if (error) {
       res.send({
@@ -59,9 +59,9 @@ grados.post("/api/grado/crearGrado", (req, res) => {
     }
   });
 });
-grados.delete("/api/grado/borrarPorId/:id", (req, res) => {
+grados.delete("/api/grados/borrarPorId/:id", (req, res) => {
   let id = req.params.id;
-  let consulta = "DELETE FROM gradodelito WHERE idGradoDelito = ? ";
+  let consulta = "DELETE FROM grados WHERE id = ? ";
   bd.query(consulta, [id], (error, grados) => {
     if (error) {
       res.send({
@@ -78,12 +78,12 @@ grados.delete("/api/grado/borrarPorId/:id", (req, res) => {
     }
   });
 });
-grados.put("/api/grado/editarPorId/:id", (req, res) => {
+grados.put("/api/grados/editarPorId/:id", (req, res) => {
   let id = req.params.id;
   let formDatosGrados = {
     grado: req.body.grado
   };
-  let consulta = "UPDATE gradodelito SET ? WHERE idGradoDelito = ?";
+  let consulta = "UPDATE grados SET ? WHERE id = ?";
   bd.query(consulta, [formDatosGrados, id], (error, grados) => {
     if (error) {
       res.send({

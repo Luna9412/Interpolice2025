@@ -21,7 +21,7 @@ especies.get("/api/especies/listarTodos", (req, res) => {
 });
 especies.get("/api/especies/listarPorId/:id", (req, res) => {
   let id = req.params.id;
-  let consulta = "SELECT * FROM especies WHERE idEspecie = ?";
+  let consulta = "SELECT * FROM especies WHERE id = ?";
   bd.query(consulta, [id], (error, especies) => {
     if (error) {
       res.send({
@@ -61,7 +61,7 @@ especies.post("/api/especies/crearEspecie", (req, res) => {
 });
 especies.delete("/api/especies/borrarPorId/:id", (req, res) => {
   let id = req.params.id;
-  let consulta = "DELETE FROM especies WHERE idEspecie = ? ";
+  let consulta = "DELETE FROM especies WHERE id = ? ";
   bd.query(consulta, [id], (error, especies) => {
     if (error) {
       res.send({
@@ -83,7 +83,7 @@ especies.put("/api/especies/editarPorId/:id", (req, res) => {
   let formDatosDeEspecies = {
     nombre: req.body.nombre
   };
-  let consulta = "UPDATE especies SET ? WHERE idEspecie  = ?";
+  let consulta = "UPDATE especies SET ? WHERE id  = ?";
   bd.query(consulta, [formDatosDeEspecies, id], (error, especies) => {
     if (error) {
       res.send({

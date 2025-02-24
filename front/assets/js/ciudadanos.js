@@ -1,12 +1,12 @@
 let tabla = document.querySelector("#miTabla");
 let frmCiudadano = document.querySelector("#frmCiudadano");
-let nombreCiudadano = document.querySelector("#TxtNombre");
-let apellidoCiudadano = document.querySelector("#TxtApellido");
-let apodoCiudadano = document.querySelector("#TxtApodo");
-let correoCiudadano = document.querySelector("#TxtCorreo");
-let fechaNacimiento = document.querySelector("#TxtFechaNacimiento");
-let especieCiudadano = document.querySelector(".especie");
-let elegirEspecie = document.querySelector("#elegirEspecie");
+let nombre = document.querySelector("#nombre");
+let apellido = document.querySelector("#apellido");
+let apodo = document.querySelector("#apodo");
+let email = document.querySelector("#email");
+let fechaNacimiento = document.querySelector("#fechaNacimiento");
+let especies = document.querySelector(".especies"); //revisar
+let especies_id = document.querySelector("#especies_id");
 let idFila = 0;
 let accionForm = "";
 
@@ -21,8 +21,8 @@ function especies() {
         .then(res => res.json())
         .then(res => {
             console.log(res);
-            res.especie.map((especie) => {
-                let options = `<option value="${especie.idEspecie}">${especie.nombre}</option>`+"</br>";
+            res.especies.map((especies) => {
+                let options = `<option value="${especies.id}">${especies.nombre}</option>`+"</br>";
                 elegirEspecie.innerHTML += options;
             })
         });
@@ -44,18 +44,18 @@ function listarCiudadanos() {
     fetch(api + "listarTodos")
     .then(res => res.json())
     .then(res => {
-        res.ciudadano.forEach((ciudadano) => {
+        res.ciudadanos.forEach((ciudadanos) => {
             let fila =
             `<tr>
-            <td>${ciudadano.idCiudadano}</td>
-            <td>${ciudadano.nombre}</td>
-            <td>${ciudadano.apellido}</td>
-            <td>${ciudadano.apodo}</td>
-            <td>${ciudadano.correo}</td>
-            <td>${ciudadano.fechaNacimiento}</td>
-            <td>${ciudadano.especie}</td>
-            <td><a type="button" class="btnEditar btn btn-sucess" onclick="obtenerId(${ciudadano.idCiudadano}, 'editar')"><i class="bi bi-pencil-square"></i></a></td>
-            <td><a type="button" class="btnBorrar btn btn-danger" onclick="obtenerId(${ciudadano.idCiudadano}, 'borrar')"><i class="bi bi-trash"></i></a></td>
+            <td>${ciudadanos.id}</td>
+            <td>${ciudadanos.nombre}</td>
+            <td>${ciudadanos.apellido}</td>
+            <td>${ciudadanos.apodo}</td>
+            <td>${ciudadanos.email}</td>
+            <td>${ciudadanos.fechaNacimiento}</td>
+            <td>${ciudadanos.especies_id}</td>
+            <td><a type="button" class="btnEditar btn btn-sucess" onclick="obtenerId(${ciudadanos.id}, 'editar')"><i class="bi bi-pencil-square"></i></a></td>
+            <td><a type="button" class="btnBorrar btn btn-danger" onclick="obtenerId(${ciudadanos.id}, 'borrar')"><i class="bi bi-trash"></i></a></td>
             </tr>`+"</br>";
             tabla.innerHTML += fila;
         });
@@ -70,12 +70,12 @@ frmCiudadano.addEventListener("submit", (e) => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                nombre: nombreCiudadano.value,
-                apellido: apellidoCiudadano.value,
-                apodo: apodoCiudadano.value,
-                correo: correoCiudadano.value,
+                nombre: nombre.value,
+                apellido: apellido.value,
+                apodo: apodo.value,
+                email: email.value,
                 fechaNacimiento: fechaNacimiento.value,
-                especie: especieCiudadano.value
+                especie: especies_id.value
             })
         })
         .then(res => res.json())
@@ -90,12 +90,12 @@ frmCiudadano.addEventListener("submit", (e) => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                nombre: nombreCiudadano.value,
-                apellido: apellidoCiudadano.value,
-                apodo: apodoCiudadano.value,
-                correo: correoCiudadano.value,
+                nombre: nombre.value,
+                apellido: apellido.value,
+                apodo: apodo.value,
+                email: email.value,
                 fechaNacimiento: fechaNacimiento.value,
-                especie: especieCiudadano.value
+                especie: especies_id.value
             })
         })
         .then(res => res.json())
@@ -111,18 +111,18 @@ function obtenerId(id,traerAccion){
         fetch(api + "listarPorId/" + id + "",{})
         .then(res => res.json())
         .then(res => {
-            res.ciudadano.map((ciudadano) => {
-                nombreCiudadano.value = ciudadano.nombre;
-                apellidoCiudadano.value = ciudadano.apellido;
-                apodoCiudadano.value = ciudadano.apodo;
-                correoCiudadano.value = ciudadano.correo;
-                fechaNacimiento.value = ciudadano.fechaNacimiento;
-                let fechaBD = new Date(ciudadano.fechaNacimiento);
+            res.ciudadanos.map((ciudadanos) => {
+                nombre.value = ciudadanos.nombre;
+                apellido.value = ciudadanos.apellido;
+                apodo.value = ciudadanos.apodo;
+                email.value = ciudadanos.email;
+                fechaNacimiento.value = ciudadanos.fechaNacimiento;
+                let fechaBD = new Date(ciudadanos.fechaNacimiento);
                 const fechaFormato = fechaBD.toLocaleDateString("es-CO", {
                     timeZone: "UTC"
                 });
                 fechaNacimiento.value = fechaFormato;
-                especieCiudadano.value = ciudadano.especie;
+                especies_id.value = ciudadanos.especies_id;
             });
     });
     frmCrearCiudadano.show();

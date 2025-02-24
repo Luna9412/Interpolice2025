@@ -1,6 +1,6 @@
-let tabla = document.querySelector("#tabla)");
+let tabla = document.querySelector("#miTabla)");
 let frmRoles = document.querySelector("#frmRoles");
-let nombreRol = document.querySelector("#nombreRol");
+let nombre = document.querySelector("#nombre");
 const frmCrearRol = new bootstrap.Modal(document.getElementById("frmCrearRol"));
 let btnNuevo = document.querySelector("#btnNuevo");
 let api = "http://localhost:4100/api/roles/";
@@ -26,10 +26,10 @@ function listarRoles(){
         res.role.forEach((roles)=>{
             let fila =
             `<tr>
-            <td>${roles.idRoles}</td>
+            <td>${roles.id}</td>
             <td>${roles.nombre}</td>
-            <td><a type="button" class="btnEditar btn btn-sucess" onclick="obtenerId(${roles.idRoles}, 'editar')"><i class="bi bi-pencil-square"></i></a></td>
-            <td><a type="button" class="btnEliminar btn btn-danger" onclick="obtenerId(${roles.idRoles}, 'borrar')"><i class="bi bi-trash"></i></a></td>
+            <td><a type="button" class="btnEditar btn btn-sucess" onclick="obtenerId(${roles.id}, 'editar')"><i class="bi bi-pencil-square"></i></a></td>
+            <td><a type="button" class="btnEliminar btn btn-danger" onclick="obtenerId(${roles.id}, 'borrar')"><i class="bi bi-trash"></i></a></td>
             </tr>` + "</br>";
             tabla.innerHTML += fila;
         });
@@ -59,7 +59,7 @@ frmRoles.addEventListener("submit", (e) => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                nombre: nombreRol.value
+                nombre: nombre.value
             })
         })
         .then((res) => res.json())
@@ -77,7 +77,7 @@ function obtenerId(id, traerAccion){
         .then((res) => res.json())
         .then((res) => {
             res.roles.map((roles) => {
-                nombreRol.value = roles.nombre;
+                nombre.value = roles.nombre;
             });
         });
         frmCrearRol.show();

@@ -1,13 +1,12 @@
 let tabla = document.querySelector('#miTabla');
 let frmDelito = document.querySelector('#frmDelito');
-let delito = document.querySelector('#TxtDelito');
-let gradoDelito = document.querySelector('#grado');
+let nombre = document.querySelector('#nombre');
+let grado_id = document.querySelector('#grado_id');
 let elegirGrado = document.querySelector('.grado');
-
 const frmCrearDelito = new bootstrap.Modal(document.getElementById('frmCrearDelito'));
 let btnNuevo = document.querySelector('#btnNuevo');
-let api = 'http://localhost:4100/api/delito';
-let APIgrado = "http://localhost:4100/api/grado/";
+let api = 'http://localhost:4100/api/delitos';
+let APIgrado = "http://localhost:4100/api/grados/";
 function grados() {
     fetch(APIgrado + "listarTodos")
     .then ((res) => res.json())
@@ -15,7 +14,7 @@ function grados() {
         console.log(res);
         res.grados.map((grados)=>{
             let options =
-            `<option value ="${grados.idGradoDelito}">${grados.grado}</option>` + "</br>";
+            `<option value ="${grados.id}">${grados.grado}</option>` + "</br>";
             elegirGrado.innerHTML += options;
         });
     });
@@ -25,7 +24,6 @@ btnNuevo.addEventListener('click', () => {
     accionForm = "agregar";
     frmCrearDelito.show();
 });
-
 const on = (element, event, selector, handler) => {
     element.addEventListener(event, e => {
         if (e.target.closest(selector)) {
@@ -33,7 +31,6 @@ const on = (element, event, selector, handler) => {
         }
     });
 };
-
 function listarDelitos(){
     fetch(api + "listarTodos")
     .then((res) => res.json())
@@ -41,10 +38,10 @@ function listarDelitos(){
         res.delitos.forEach((delitos)=>{
             let fila =
             `<tr>
-            <td>${delitos.idTipoDelito}</td>
-            <td>${delitos.delito}</td>
-            <td><a type= "button" class="btnEditar btn btn-sucess" onclick="obtenerId(${delitos.idTipoDelito},'editar')"><i class="bi bi-pencil-square"></i></a></td>
-            <td><a type= "button" class="btnBorrar btn btn-danger" onclick="obtenerId(${delitos.idTipoDelito},'borrar')"><i class="bi bi-trash"></i></a></td>
+            <td>${delitos.id}</td>
+            <td>${delitos.nombre}</td>
+            <td><a type= "button" class="btnEditar btn btn-sucess" onclick="obtenerId(${delitos.id},'editar')"><i class="bi bi-pencil-square"></i></a></td>
+            <td><a type= "button" class="btnBorrar btn btn-danger" onclick="obtenerId(${delitos.id},'borrar')"><i class="bi bi-trash"></i></a></td>
             </tr>`+"</br>";
             tabla.innerHTML += fila;
         })
@@ -59,8 +56,8 @@ frmDelito.addEventListener('submit', (e) => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                delito: delito.value,
-                grado: gradoDelito.value
+                nombre: nombre.value,
+                grado_id: grado_id.value
             })
         })
         .then((res) => res.json())
@@ -74,8 +71,8 @@ frmDelito.addEventListener('submit', (e) => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                delito: delito.value,
-                grado: gradoDelito.value
+                nombre: nombre.value,
+                grado_id: grado_id.value
             })
         })
         .then((res) => res.json())
@@ -85,7 +82,6 @@ frmDelito.addEventListener('submit', (e) => {
         });
     }
 });
-
 function obtenerId(id, traerAccion){
     if(traerAccion === "editar"){
         idFila = id;
@@ -94,7 +90,7 @@ function obtenerId(id, traerAccion){
         .then((res) => res.json())
         .then((res)=>{
             res.delitos.map((delitos)=>{
-                nombreDelito.value = delitos.delito;
+                nombre.value = delitos.nombre;
             });
         });
         frmCrearDelito.show();

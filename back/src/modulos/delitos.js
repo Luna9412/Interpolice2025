@@ -1,8 +1,8 @@
 const express = require('express');
 const bd = require('./bd.js');
 const delitos = express();
-delitos.get("/api/delito/listarTodos", (req, res) => {
-    let consulta = "SELECT gradodelito.grado, tipodelito.idTipoDelito, tipodelito.delito FROM tipodelito INNER JOIN gradodelito ON gradodelito.idGradoDelito = tipodelito.gradoDelito_idGradoDelito";
+delitos.get("/api/delitos/listarTodos", (req, res) => {
+    let consulta = "SELECT grados.grado, delitos.id, delitos.nombre FROM delitos INNER JOIN grados ON grados.id = delitos.grados_id";
     bd.query(consulta, (error, delitos) => {
       if (error) {
         res.send({
@@ -19,9 +19,9 @@ delitos.get("/api/delito/listarTodos", (req, res) => {
       }
     });
   });
-  delitos.get("/api/delito/listarPorId/:id", (req, res) => {
+  delitos.get("/api/delitos/listarPorId/:id", (req, res) => {
     let id = req.params.id;
-    let consulta = "SELECT * FROM tipodelito WHERE idTipoDelito = ?";
+    let consulta = "SELECT * FROM delitos WHERE id = ?";
     bd.query(consulta,[id], (error, delitos) => {
       if (error) {
         res.send({
@@ -38,12 +38,12 @@ delitos.get("/api/delito/listarTodos", (req, res) => {
       }
     });
   });
-  delitos.post("/api/delito/crearDelito", (req, res) => {
+  delitos.post("/api/delitos/crearDelito", (req, res) => {
     let formDatosDelitos = {
-      delito: req.body.delito,
-      gradoDelito_idGradoDelito: req.body.gradoDelito_idGradoDelito
+      nombre: req.body.nombre,
+      grados_id: req.body.grados_id
     };
-    let consulta = "INSERT INTO tipodelito SET ? ";
+    let consulta = "INSERT INTO delitos SET ? ";
     bd.query(consulta, [formDatosDelitos], (error, delitos) => {
       if (error) {
         res.send({
@@ -60,9 +60,9 @@ delitos.get("/api/delito/listarTodos", (req, res) => {
       }
     });
   });
-  delitos.delete("/api/delito/borrarPorId/:id", (req, res) => {
+  delitos.delete("/api/delitos/borrarPorId/:id", (req, res) => {
     let id = req.params.id;
-    let consulta = "DELETE FROM tipodelito WHERE idTipoDelito = ? ";
+    let consulta = "DELETE FROM delitos WHERE id = ? ";
     bd.query(consulta, [id], (error, respuesta) => {
       if (error) {
         res.send({
@@ -79,13 +79,13 @@ delitos.get("/api/delito/listarTodos", (req, res) => {
       }
     });
   });
-  delitos.put("/api/delito/editarPorId/:id", (req, res) => {
+  delitos.put("/api/delitos/editarPorId/:id", (req, res) => {
     let id = req.params.id;
     let formDatosDelitos = {
-      delito: req.body.delito,
-      gradoDelito_idGradoDelito: req.body.gradoDelito_idGradoDelito
+      nombre: req.body.nombre,
+      grados_id: req.body.grados_id
     };
-    let consulta = "UPDATE tipodelito SET ? WHERE idTipoDelito = ?";
+    let consulta = "UPDATE delitos SET ? WHERE id = ?";
     bd.query(consulta, [formDatosDelitos, id], (error, respuesta) => {
       if (error) {
         res.send({

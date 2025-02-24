@@ -21,7 +21,7 @@ roles.get("/api/roles/listarTodos", (req, res) => {
 });
 roles.get("/api/roles/listarPorId/:id", (req, res) => {
   let id = req.params.id;
-  let consulta = "SELECT * FROM roles WHERE idRoles  = ?";
+  let consulta = "SELECT * FROM roles WHERE id  = ?";
   bd.query(consulta, [id], (error, roles) => {
     if (error) {
       res.send({
@@ -61,7 +61,7 @@ roles.post("/api/roles/crearRol", (req, res) => {
 });
 roles.delete("/api/roles/borrarPorId/:id", (req, res) => {
   let id = req.params.id;
-  let consulta = "DELETE FROM roles WHERE idRoles = ?";
+  let consulta = "DELETE FROM roles WHERE id = ?";
   bd.query(consulta, [id], (error, respuesta) => {
     if (error) {
       res.send({
@@ -83,7 +83,7 @@ roles.put("/api/roles/editarPorId/:id", (req, res) => {
   let formDatosDeRoles = {
     nombre: req.body.nombre
   };
-  let consulta = "UPDATE roles SET ? WHERE idRoles = ?";
+  let consulta = "UPDATE roles SET ? WHERE id = ?";
   bd.query(consulta, [formDatosDeRoles, id], (error, respuesta) => {
     if (error) {
       res.send({
